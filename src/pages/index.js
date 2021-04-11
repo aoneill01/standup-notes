@@ -16,8 +16,10 @@ const initialState = {
   postScrum: [],
 };
 
+const isBrowser = typeof window !== "undefined";
+
 const loadFromLocalStorage = () => {
-  const result = window.localStorage.getItem("notes");
+  const result = isBrowser && window.localStorage.getItem("notes");
   return result ? JSON.parse(result) : null;
 };
 
