@@ -1,15 +1,15 @@
 import * as React from "react";
-import NotesList from "../components/NotesList";
+import Layout from "../components/layout";
+import NotesList from "../components/notesList";
 
-const pageStyles = {
-  color: "#232129",
-  margin: "0 auto",
-  width: 900,
-  padding: 8,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
+type Notes = {
+  yesterday: string[],
+  today: string[],
+  blocked: string[],
+  postScrum: string[],
+}
 
-const initialState = {
+const initialState: Notes = {
   yesterday: [],
   today: [],
   blocked: [],
@@ -20,40 +20,44 @@ const isBrowser = typeof window !== "undefined";
 
 const loadFromLocalStorage = () => {
   const result = isBrowser && window.localStorage.getItem("notes");
-  return result ? JSON.parse(result) : null;
+  return result ? JSON.parse(result) as Notes : null;
 };
 
 const IndexPage = () => {
   const [notes, setNotes] = React.useState(
     loadFromLocalStorage() ?? initialState
   );
+
   React.useEffect(() => {
     window.localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
-  const addItem = (property) => (item) => {
-    const currentItems = notes[property];
+  const addItem = (property: string) => (item: string) => {
+    const currentItems: string[] = notes[property];
     setNotes({
       ...notes,
       [property]: [...currentItems, item],
     });
   };
-  const removeItem = (property) => (item) => {
-    const currentItems = notes[property];
+
+  const removeItem = (property: string) => (item: string) => {
+    const currentItems: string[] = notes[property];
     setNotes({
       ...notes,
       [property]: currentItems.filter((existing) => existing !== item),
     });
   };
+
   const noteListProperties = (property) => ({
     items: notes[property],
     onItemAdded: addItem(property),
     onItemRemoved: removeItem(property),
   });
+  
   const clearAll = () => setNotes(initialState);
 
   return (
-    <main style={pageStyles}>
+    <Layout>
       <title>Standup Notes</title>
       <h1>Standup Notes</h1>
       <NotesList {...noteListProperties("yesterday")} label="Yesterday I:" />
@@ -64,7 +68,7 @@ const IndexPage = () => {
         label="Post scrum topics:"
       />
       <button onClick={clearAll}>Clear</button>
-    </main>
+    </Layout>
   );
 };
 

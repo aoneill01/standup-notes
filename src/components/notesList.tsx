@@ -1,28 +1,11 @@
 import * as React from "react";
+import * as styles from "./notesList.module.css";
 
-const labelStyles = {
-  fontWeight: "bold",
-};
-
-const inputStyles = {
-  flexGrow: 1,
-};
-
-const topStyles = {
-  display: "flex",
-  gap: 8,
-};
-
-const closeStyles = {
-  border: "none",
-  backgroundColor: "rgba(255, 255, 255, 0)",
-};
-
-const renderItem = (item) => {
+const renderItem = (item: string) => {
   const storyRegex = /cpm-\d+/gi;
   let index = 0;
-  let match;
-  let children = [];
+  let match: RegExpExecArray;
+  let children: (JSX.Element | string)[]  = [];
   while ((match = storyRegex.exec(item)) !== null) {
     children.push(item.substring(index, match.index));
     children.push(
@@ -41,15 +24,25 @@ const renderItem = (item) => {
   return <>{children}</>;
 };
 
+type ItemHandler = (item: string) => void;
+
+type NotesListProps = {
+  label: string,
+  items: string[],
+  onItemAdded?: ItemHandler,
+  onItemRemoved?: ItemHandler,
+}
+
 const NotesList = ({
   label,
-  items = [],
+  items,
   onItemAdded = () => {},
   onItemRemoved = () => {},
-}) => {
+}: NotesListProps) => {
+  console.log(styles)
   const [newItem, setNewItem] = React.useState("");
 
-  const onKeyUp = ({ key }) => {
+  const onKeyUp = ({ key }: React.KeyboardEvent) => {
     if (key === "Enter") {
       onItemAdded(newItem);
       setNewItem("");
@@ -58,21 +51,21 @@ const NotesList = ({
 
   return (
     <>
-      <div style={topStyles}>
-        <label style={labelStyles}>{label}</label>
+      <div className={styles.top}>
+        <label className={styles.label}>{label}</label>
         <input
           type="text"
           value={newItem}
           onChange={(event) => setNewItem(event.target.value)}
           onKeyUp={onKeyUp}
-          style={inputStyles}
+          className={styles.input}
         />
       </div>
       <ul>
         {items.map((item, index) => (
           <li key={index}>
             {renderItem(item)}{" "}
-            <button style={closeStyles} onClick={() => onItemRemoved(item)}>
+            <button className={styles.close} onClick={() => onItemRemoved(item)}>
               ×
             </button>
           </li>
