@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as styles from "./notesList.module.css";
 
-const renderItem = (item: string) => {
+const renderNote = (item: string) => {
   const storyRegex = /cpm-\d+/gi;
   let index = 0;
   let match: RegExpExecArray;
-  let children: (JSX.Element | string)[]  = [];
+  let children: (JSX.Element | string)[] = [];
   while ((match = storyRegex.exec(item)) !== null) {
     children.push(item.substring(index, match.index));
     children.push(
@@ -27,25 +27,25 @@ const renderItem = (item: string) => {
 type ItemHandler = (item: string) => void;
 
 type NotesListProps = {
-  label: string,
-  items: string[],
-  onItemAdded?: ItemHandler,
-  onItemRemoved?: ItemHandler,
-}
+  label: string;
+  notes: string[];
+  onNoteAdded?: ItemHandler;
+  onNoteRemoved?: ItemHandler;
+};
 
 const NotesList = ({
   label,
-  items,
-  onItemAdded = () => {},
-  onItemRemoved = () => {},
+  notes,
+  onNoteAdded = () => {},
+  onNoteRemoved = () => {},
 }: NotesListProps) => {
-  console.log(styles)
-  const [newItem, setNewItem] = React.useState("");
+  console.log(styles);
+  const [newNote, setNewNote] = React.useState("");
 
   const onKeyUp = ({ key }: React.KeyboardEvent) => {
     if (key === "Enter") {
-      onItemAdded(newItem);
-      setNewItem("");
+      onNoteAdded(newNote);
+      setNewNote("");
     }
   };
 
@@ -55,17 +55,20 @@ const NotesList = ({
         <label className={styles.label}>{label}</label>
         <input
           type="text"
-          value={newItem}
-          onChange={(event) => setNewItem(event.target.value)}
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
           onKeyUp={onKeyUp}
           className={styles.input}
         />
       </div>
       <ul>
-        {items.map((item, index) => (
+        {notes.map((note, index) => (
           <li key={index}>
-            {renderItem(item)}{" "}
-            <button className={styles.close} onClick={() => onItemRemoved(item)}>
+            {renderNote(note)}{" "}
+            <button
+              className={styles.close}
+              onClick={() => onNoteRemoved(note)}
+            >
               ×
             </button>
           </li>
