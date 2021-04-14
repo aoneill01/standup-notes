@@ -1,6 +1,8 @@
-import React from "react"
-import "./layout.css"
+import { Container } from "@material-ui/core";
+import React from "react";
 
-const Layout: React.FunctionComponent = ({ children }) => <main>{children}</main>
+const Layout: React.FunctionComponent = ({ children }) => (
+  <Container fixed>{children}</Container>
+);
 
 export default Layout;

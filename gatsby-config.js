@@ -2,5 +2,5 @@ module.exports = {
   siteMetadata: {
     title: "Standup Notes",
   },
-  plugins: ["gatsby-plugin-gatsby-cloud"],
+  plugins: ["gatsby-plugin-gatsby-cloud", "gatsby-theme-material-ui"],
 };

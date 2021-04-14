@@ -1,5 +1,13 @@
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  TextField,
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import * as React from "react";
-import * as styles from "./notesList.module.css";
 
 const renderNote = (item: string) => {
   const storyRegex = /cpm-\d+/gi;
@@ -39,7 +47,6 @@ const NotesList = ({
   onNoteAdded = () => {},
   onNoteRemoved = () => {},
 }: NotesListProps) => {
-  console.log(styles);
   const [newNote, setNewNote] = React.useState("");
 
   const onKeyUp = ({ key }: React.KeyboardEvent) => {
@@ -51,29 +58,29 @@ const NotesList = ({
 
   return (
     <>
-      <div className={styles.top}>
-        <label className={styles.label}>{label}</label>
-        <input
-          type="text"
-          value={newNote}
-          onChange={(event) => setNewNote(event.target.value)}
-          onKeyUp={onKeyUp}
-          className={styles.input}
-        />
-      </div>
-      <ul>
+      <TextField
+        label={label}
+        value={newNote}
+        onChange={(event) => setNewNote(event.target.value)}
+        onKeyUp={onKeyUp}
+        fullWidth
+      />
+      <List>
         {notes.map((note, index) => (
-          <li key={index}>
-            {renderNote(note)}{" "}
-            <button
-              className={styles.close}
-              onClick={() => onNoteRemoved(note)}
-            >
-              ×
-            </button>
-          </li>
+          <ListItem key={index}>
+            <ListItemText primary={renderNote(note)}></ListItemText>
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => onNoteRemoved(note)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 };
