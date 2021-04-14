@@ -28,17 +28,15 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <title>Notes</title>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography component="h1" variant="h3">
-            Notes
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Card>
+          <Card style={{ marginTop: 24 }}>
             <CardContent>
-              <Typography component="h2" variant="h4">
+              <Typography
+                component="h2"
+                variant="h6"
+                style={{ marginBottom: 8 }}
+              >
                 Daily Standup
               </Typography>
               <NotesList
@@ -72,7 +70,11 @@ const IndexPage = () => {
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography component="h2" variant="h4">
+              <Typography
+                component="h2"
+                variant="h6"
+                style={{ marginBottom: 8 }}
+              >
                 Retrospective
               </Typography>
               <NotesList {...noteListProperties("retro")} label="For retro:" />

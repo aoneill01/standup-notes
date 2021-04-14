@@ -1,11 +1,13 @@
 import {
   IconButton,
+  InputAdornment,
   List,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
   TextField,
 } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import * as React from "react";
 
@@ -51,19 +53,34 @@ const NotesList = ({
 
   const onKeyUp = ({ key }: React.KeyboardEvent) => {
     if (key === "Enter") {
-      onNoteAdded(newNote);
-      setNewNote("");
+      addNote();
     }
+  };
+
+  const addNote = () => {
+    onNoteAdded(newNote);
+    setNewNote("");
   };
 
   return (
     <>
       <TextField
+        type="text"
         label={label}
         value={newNote}
         onChange={(event) => setNewNote(event.target.value)}
         onKeyUp={onKeyUp}
         fullWidth
+        variant="filled"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton disabled={!newNote} onClick={addNote}>
+                <Add />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <List>
         {notes.map((note, index) => (
