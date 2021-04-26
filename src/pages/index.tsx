@@ -9,6 +9,7 @@ import {
 import * as React from "react";
 import Layout from "../components/layout";
 import NotesList from "../components/notesList";
+import TriageCard from "../components/triageCard";
 import { useNotes } from "../hooks/useNotes";
 
 const IndexPage = () => {
@@ -89,6 +90,9 @@ const IndexPage = () => {
               </Button>
             </CardActions>
           </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <TriageCard />
         </Grid>
       </Grid>
     </Layout>
