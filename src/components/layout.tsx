@@ -9,7 +9,13 @@ const Layout: React.FunctionComponent = ({ children }) => (
         lang: "en",
       }}
       title="Notes"
-      meta={[{ name: "charSet", content: "utf-8" }]}
+      meta={[
+        { name: "charSet", content: "utf-8" },
+        {
+          name: "description",
+          content: "Quick notes for daily standups and retrospectives",
+        },
+      ]}
     />
     <title>Notes</title>
     <AppBar position="sticky">

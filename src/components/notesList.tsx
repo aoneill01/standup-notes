@@ -37,6 +37,7 @@ const renderNote = (item: string) => {
 type ItemHandler = (item: string) => void;
 
 type NotesListProps = {
+  id: string;
   label: string;
   notes: string[];
   onNoteAdded?: ItemHandler;
@@ -44,6 +45,7 @@ type NotesListProps = {
 };
 
 const NotesList = ({
+  id,
   label,
   notes,
   onNoteAdded = () => {},
@@ -68,6 +70,7 @@ const NotesList = ({
         type="text"
         label={label}
         value={newNote}
+        id={id}
         onChange={(event) => setNewNote(event.target.value)}
         onKeyUp={onKeyUp}
         fullWidth
@@ -75,7 +78,11 @@ const NotesList = ({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton disabled={!newNote} onClick={addNote}>
+              <IconButton
+                aria-label="add"
+                disabled={!newNote}
+                onClick={addNote}
+              >
                 <Add />
               </IconButton>
             </InputAdornment>

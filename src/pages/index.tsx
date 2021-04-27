@@ -43,18 +43,22 @@ const IndexPage = () => {
               <NotesList
                 {...noteListProperties("yesterday")}
                 label="Yesterday I:"
+                id="yesterday"
               />
               <NotesList
                 {...noteListProperties("today")}
                 label="Today I will:"
+                id="today"
               />
               <NotesList
                 {...noteListProperties("blocked")}
                 label="I am blocked by:"
+                id="blocked"
               />
               <NotesList
                 {...noteListProperties("postScrum")}
                 label="Post scrum topics:"
+                id="postScrum"
               />
             </CardContent>
             <CardActions>
@@ -78,10 +82,15 @@ const IndexPage = () => {
               >
                 Retrospective
               </Typography>
-              <NotesList {...noteListProperties("retro")} label="For retro:" />
+              <NotesList
+                {...noteListProperties("retro")}
+                label="For retro:"
+                id="retro"
+              />
               <NotesList
                 {...noteListProperties("techRetro")}
                 label="For tech retro:"
+                id="techRetro"
               />
             </CardContent>
             <CardActions>
