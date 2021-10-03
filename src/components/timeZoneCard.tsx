@@ -41,7 +41,7 @@ function calculateTimeZones() {
 }
 
 const TimeZoneCard: React.FunctionComponent = () => {
-  const [timeZones, setTimeZones] = useState(calculateTimeZones());
+  const [timeZones, setTimeZones] = useState([]);
 
   useEffect(() => {
     let id = undefined;
@@ -51,6 +51,7 @@ const TimeZoneCard: React.FunctionComponent = () => {
         handleNextMinute();
       }, 1000 * (61 - new Date().getSeconds()));
     };
+    setTimeZones(calculateTimeZones());
     handleNextMinute();
     return () => clearTimeout(id);
   }, []);
