@@ -9,6 +9,7 @@ import {
 import * as React from "react";
 import Layout from "../components/layout";
 import NotesList from "../components/notesList";
+import TimeZoneCard from "../components/timeZoneCard";
 import TriageCard from "../components/triageCard";
 import { useNotes } from "../hooks/useNotes";
 
@@ -100,8 +101,11 @@ const IndexPage = () => {
             </CardActions>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={8}>
           <TriageCard />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <TimeZoneCard />
         </Grid>
       </Grid>
     </Layout>
