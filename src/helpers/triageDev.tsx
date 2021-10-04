@@ -6,7 +6,7 @@ export type TriageDevs = {
 };
 
 export function getTriageDevs(date: Date): TriageDevs {
-  const developerOrder = ["JK", "XL", "AO", "BW", "AC", "KH"];
+  const developerOrder = ["AC", "JK", "XL", "BW"];
   const getDeveloperForIndex = (index: number) =>
     developerOrder[index % developerOrder.length];
   const week = differenceInCalendarWeeks(date, new Date(2021, 9, 4), {
