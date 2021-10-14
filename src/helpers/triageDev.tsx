@@ -6,7 +6,7 @@ export type TriageDevs = {
 };
 
 export function getTriageDevs(date: Date): TriageDevs {
-  const primaryOrder = ["AC", "JK", "XL", "BW"];
+  const primaryOrder = ["AC", "JK", "XL", "RM", "BW"];
   const secondaryOrder = ["AO", "KH"];
   const getDeveloperForIndex = (index: number, order) =>
     order[index % order.length];
