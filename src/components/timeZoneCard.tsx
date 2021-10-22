@@ -29,6 +29,7 @@ function calculateTimeZones() {
   const timeZones = [
     { timeZone: "America/Los_Angeles", name: "US Pacific" },
     { timeZone: "America/Bogota", name: "Colombia" },
+    { timeZone: "America/Lima", name: "Peru" },
     { timeZone: "America/New_York", name: "US East" },
     { timeZone: "Asia/Kolkata", name: "India" },
   ];
