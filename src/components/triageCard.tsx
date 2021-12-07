@@ -26,13 +26,16 @@ const useStyles = makeStyles((theme) => ({
 
 const TriageCard: React.FunctionComponent = () => {
   const classes = useStyles();
-  const [triageData, setTriageData] = useState<[TriageDevs, TriageDevs]>(null);
+  const [triageData, setTriageData] = useState<TriageDevs[]>(null);
 
   const updateTriageData = () => {
-    const today = new Date();
-    const nextWeek = new Date(today);
-    nextWeek.setDate(today.getDate() + 7);
-    setTriageData([getTriageDevs(today), getTriageDevs(nextWeek)]);
+    const devs: TriageDevs[] = [];
+    const date = new Date();
+    for (let i = 0; i < 3; i++) {
+      devs.push(getTriageDevs(date));
+      date.setDate(date.getDate() + 7);
+    }
+    setTriageData(devs);
   };
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const TriageCard: React.FunctionComponent = () => {
   }, []);
 
   if (!triageData) return null;
-  const [currentWeek, nextWeek] = triageData;
+  const [currentWeek, nextWeek, twoWeeks] = triageData;
 
   return (
     <Card>
@@ -55,7 +58,6 @@ const TriageCard: React.FunctionComponent = () => {
             <TableRow>
               <TableCell></TableCell>
               <TableCell>Primary</TableCell>
-              <TableCell>Secondary</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -66,19 +68,17 @@ const TriageCard: React.FunctionComponent = () => {
                   {currentWeek.primary}
                 </Avatar>
               </TableCell>
-              <TableCell>
-                <Avatar className={classes.secondary}>
-                  {currentWeek.secondary}
-                </Avatar>
-              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Next week</TableCell>
               <TableCell>
                 <Avatar>{nextWeek.primary}</Avatar>
               </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>2 weeks</TableCell>
               <TableCell>
-                <Avatar>{nextWeek.secondary}</Avatar>
+                <Avatar>{twoWeeks.primary}</Avatar>
               </TableCell>
             </TableRow>
           </TableBody>
