@@ -6,10 +6,10 @@ export type TriageDevs = {
 };
 
 export function getTriageDevs(date: Date): TriageDevs {
-  const primaryOrder = ["RA", "LC", "KH", "AO", "XL", "RM", "CT", "BW"];
+  const primaryOrder = ["CT", "RA", "KH", "XL", "RM"];
   const getDeveloperForIndex = (index: number, order) =>
     order[index % order.length];
-  const week = differenceInCalendarWeeks(date, new Date(2021, 11, 6), {
+  const week = differenceInCalendarWeeks(date, new Date(2022, 0, 17), {
     weekStartsOn: 1,
   });
 
