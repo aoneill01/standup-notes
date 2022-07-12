@@ -30,6 +30,7 @@ function calculateTimeZones() {
     { timeZone: "America/Los_Angeles", name: "US Pacific" },
     { timeZone: "America/Bogota", name: "Colombia" },
     { timeZone: "America/Lima", name: "Peru" },
+    { timeZone: "America/Mexico_City", name: "Mexico" },
     { timeZone: "America/New_York", name: "US East" },
     { timeZone: "Asia/Kolkata", name: "India" },
   ];
@@ -64,9 +65,16 @@ const TimeZoneCard: React.FunctionComponent = () => {
           Time Zones
         </Typography>
 
-        <List>
+        <List
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            padding: 0,
+            flexWrap: "wrap",
+          }}
+        >
           {timeZones.map(({ name, formatted, hour, minute }) => (
-            <ListItem key={name}>
+            <ListItem key={name} style={{ width: 290 }}>
               <ListItemIcon>
                 <AnalogClock
                   useCustomTime={true}

@@ -101,10 +101,7 @@ const IndexPage = () => {
             </CardActions>
           </Card>
         </Grid>
-        <Grid item xs={12} md={8}>
-          <TriageCard />
-        </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12}>
           <TimeZoneCard />
         </Grid>
       </Grid>
